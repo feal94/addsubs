@@ -2,7 +2,6 @@ from django.db import models
 
 class Job(models.Model):
 	user = models.CharField(max_length=50)
-	id = models. AutoField
 	video = models.CharField(max_length=100)
 	language = models.CharField(max_length=100)
 	delay = models.IntegerField()
