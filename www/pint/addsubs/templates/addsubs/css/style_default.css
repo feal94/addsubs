@@ -5,14 +5,25 @@ html, body {
     font-size: 100%;
 }
 
+ h1 { 
+    text-align: center;
+    margin: auto; 
+    font-size: 3em;
+  }
+
+header {
+  height: 15%;
+  min-height: 15%; 
+  width: 100%;
+  display: inline-block;
+  text-align: center; 
+  position: relative;
+  background-color: dimgray;
+}  
+  
 div#wrapper {
     min-height: 100%;
     position: relative;
-}
-
-header {
-    top: 0;
-    background-color: dimgray;
 }
 
 header h1 {
