@@ -15,6 +15,7 @@ def index(request):
 			job=Job(user=user,video=video,language=language)
 			# Aqui se podria comprobar con expresiones regulares si es con el formato correcto
 			job.save()
-			job_list=Job.objects.all()
-			context={'job_list':job_list}
-			return render(request,'addsubs/index.html',context)
+	#job_list=Job.objects.all()
+	job_list = []
+	context={'job_list':job_list}
+	return render(request,'addsubs/index.html',context)
