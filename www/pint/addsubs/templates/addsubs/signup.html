@@ -4,7 +4,7 @@
     {% if form.errors %}
         <p>{{ form.errors }}</p>
     {% endif %}
-
+	 <div id="contact-area">
     <form method="post" action="{% url 'signup' %}">
 
         {% csrf_token %}
@@ -20,7 +20,7 @@
             </tr>
         </table>
 
-        <input type="submit" value="Sign up"/>
+        <input type="submit" value="Sign up" class="submit-button"/>
     </form>
-
+	</div>
 {% endblock %}
