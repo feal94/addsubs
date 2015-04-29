@@ -4,9 +4,15 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import User
 from signup import SignUpForm
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
+	context= {'user': request.user}
+	return render(request,'addsubs/main.html',context)
+
+@login_required()
+def main(request):
 	if request.POST.has_key('ruta'):
 		#user=
 		path=request.POST['ruta']
@@ -21,10 +27,7 @@ def index(request):
 	#job_list=Job.objects.all()
 	job_list = []
 	context={'job_list':job_list}
-	return render(request,'addsubs/index.html',context)
-
-def main(request):
-	return render(request,'main.html',context)
+	return render(request,'addsubs/main.html',context)
 
 def signup(request):
 	if request.method == 'POST':  # If the form has been submitted...
