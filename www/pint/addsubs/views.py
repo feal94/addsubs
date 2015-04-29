@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from signup import SignUpForm
 
 
 def index(request):
@@ -18,3 +19,24 @@ def index(request):
 	job_list = []
 	context={'job_list':job_list}
 	return render(request,'addsubs/index.html',context)
+
+def main(request):
+	return render(request,'main.html',context)
+
+def signup(request):
+	if request.method == 'POST':  # If the form has been submitted...
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data["username"]
+			password = form.cleaned_data["password"]
+			user = User.objects.create_user(username=username, password=password)
+			user.save()
+
+			return HttpResponseRedirect(reverse('main'))  # Redirect after POST
+	else:
+		form = SignUpForm()
+
+	data = {
+		'form': form,
+	}
+	return render(request,'signup.html', data, context)
