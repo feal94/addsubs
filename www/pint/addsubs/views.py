@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse
+from django.http.response import HttpResponseRedirect
+from django.contrib.auth.models import User
 from signup import SignUpForm
 
 
@@ -36,7 +39,5 @@ def signup(request):
 	else:
 		form = SignUpForm()
 
-	data = {
-		'form': form,
-	}
-	return render(request,'signup.html', data, context)
+	context={'form': form}
+	return render(request,'addsubs/signup.html', context)
