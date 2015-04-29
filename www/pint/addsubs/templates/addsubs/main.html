@@ -1,5 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
 
+    <form method="post" action="">
+        {% csrf_token %}
+        <div id="contact-area">
+			
+			<form method="post" action="">
+				<label for="Path">Path:</label>
+				<input type="text" name="Path" id="Path" placeholder="Path to the file" />
+				
+				<label for="Language">Language:</label>
+				<input type="text" name="Language" id="Language" placeholder="Language of the subtitles" />
+
+				<input type="submit" name="submit" value="Submit" class="submit-button" />
+			</form>
+			
+			<div style="clear: both;"></div>
+			
+		</div>
+       <!-- Path:
+        <input type="text" name="Path" placeholder="Path to the video">
+		Language: 
+		<input type="text" name="Language" placeholder="Language of the subtitles">
+        <input type="submit" value="Submit"/> 
+    </form>
+    -->
 {% endblock %}
