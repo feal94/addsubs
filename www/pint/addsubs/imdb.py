@@ -14,8 +14,8 @@ class MovieInformation():
 		url = self.server + 't=' + title + '&y=&plot=short&r=json'
 		try:
 			request = requests.request(method, url, timeout)
-			answer = eval(request.text)
-			if answer["result"] == "success":
+			if request.status_code == 200:
+				answer = eval(request.text)
 				return answer["data"]
 			else:
 				return "Result failed"
