@@ -6,8 +6,9 @@ class MovieInformation():
 	#server = 'http://api.thesubdb.com/?action='
 	server = 'http://sandbox.thesubdb.com/?action='
 
-	def __init__(self, name):
+	def __init__(self, name, languages):
 		self.name = name
+		self.language= languages
 
 	def get_hash(self):
 		readsize = 64 * 1024

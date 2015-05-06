@@ -25,11 +25,11 @@ def main(request):
 			# Comprobar con expresiones regulares si es con el formato correcto
 			#job=Job(user='user',video='video',language='language',finished=False)
 			#job.save()
+			sub = MovieInformation(path, language)
+			sub.main()
 	#job_list=Job.objects.all()
 	job_list = []
 	context={'job_list':job_list}
-	sub = MovieInformation('hola')
-	sub.main()
 	return render(request,'addsubs/main.html',context) # De momento redirecciona a la misma pagina, pero en un futuro redirigira a otra
 
 def signup(request):
