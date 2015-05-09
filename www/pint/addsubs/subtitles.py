@@ -1,6 +1,6 @@
 import requests
 import urllib
-
+import eventlet
 
 class MovieInformation():
 	#server = 'http://api.thesubdb.com/?action='
@@ -8,7 +8,9 @@ class MovieInformation():
 
 	def __init__(self, name):
 		self.name = name
-
+		self.user_agent= {
+			'User-Agent': 'SubDB/1.0 (AddSubs/1.0;https://github.com/feal94/addsubs)'
+		}
 	def get_hash(self):
 		readsize = 64 * 1024
 		with open(name, 'rb') as f:
@@ -19,18 +21,17 @@ class MovieInformation():
 		return hashlib.md5(data).hexdigest()
 
 	def check(self):
-		method = 'GET'
+		#This list all available languages for a movie
+		#method = 'GET'
 		timeout = 500
 		action = 'search'
 		hash = 'hash=' + self.hash
 		url = self.server + action + '&' + hash
 		try:
-			request = requests.request(method, url, timeout)
+			with eventlet.Timeout(timeout)
+				request = requests.get(url, headers=self.user_agent)
 			if request.status_code == 200:
 				return request.text
-			#answer = eval(request.text)
-			#if answer["result"] == "success":
-			#	return answer["data"]
 			else:
 				return "Result failed"
 		except:
@@ -38,21 +39,21 @@ class MovieInformation():
 
 
 	def download(self):
-		method = 'GET'
+		#method = 'GET'
 		timeout = 500
 		action = 'download'
 		hash = 'hash=' + self.hash
 		language = 'language=' + self.language
 		url = self.server + action + '&' + hash + '&' + language
 		try:
-			request = requests.request(method, url, timeout)
+			with eventlet.Timeout(timeout)
+				request = requests.get(url, headers=self.user_agent)
 			if request.status_code == 200:
 				return request.text
-			#answer = eval(request.text)
-			#if answer["result"] == "success":
-				#return answer["data"]
-			else:
-				return "Result failed"
+			elif request.status_code == 404
+				return "Not avaliable"
+			elif request.status_code == 400
+				return "Malformed request"
 		except:
 			return "Server failed"
 
