@@ -9,14 +9,14 @@ class MovieInformation():
 		self.title = title
 
 	def recoverInformation(self):
-		method = 'GET'
-		timeout = 500
+		#method = 'GET'
+		#timeout = 500
 		url = self.server + 't=' + title + '&y=&plot=short&r=json'
 		try:
-			request = requests.request(method, url, timeout)
+			request = requests.get(url)
 			if request.status_code == 200:
-				answer = eval(request.text)
-				return answer["data"]
+				answer = (request.text)
+				return answer
 			else:
 				return "Result failed"
 		except:
