@@ -1,6 +1,6 @@
 import requests
 import urllib
-import eventlet
+#import eventlet
 
 class MovieInformation():
 	#server = 'http://api.thesubdb.com/?action='
@@ -9,9 +9,7 @@ class MovieInformation():
 	def __init__(self, name, languages):
 		self.name = name
 		self.language= languages
-		self.user_agent= {
-			'User-Agent': 'SubDB/1.0 (AddSubs/1.0;https://github.com/feal94/addsubs)'
-		}
+		self.user_agent= {'User-Agent': 'SubDB/1.0 (AddSubs/1.0;https://github.com/feal94/addsubs)'}
 
 	def get_hash(self):
 		readsize = 64 * 1024
@@ -30,8 +28,8 @@ class MovieInformation():
 		hash = 'hash=' + self.hash
 		url = self.server + action + '&' + hash
 		try:
-			with eventlet.Timeout(timeout)
-				request = requests.get(url, headers=self.user_agent)
+			#with eventlet.Timeout(timeout)
+			request = requests.get(url, headers=self.user_agent)
 			if request.status_code == 200:
 				return request.text
 			else:
@@ -48,13 +46,13 @@ class MovieInformation():
 		language = 'language=' + self.language
 		url = self.server + action + '&' + hash + '&' + language
 		try:
-			with eventlet.Timeout(timeout)
-				request = requests.get(url, headers=self.user_agent)
+			#with eventlet.Timeout(timeout)
+			request = requests.get(url, headers=self.user_agent)
 			if request.status_code == 200:
 				return request.text
-			elif request.status_code == 404
+			elif request.status_code == 404:
 				return "Not avaliable"
-			elif request.status_code == 400
+			elif request.status_code == 400:
 				return "Malformed request"
 		except:
 			return "Server failed"
