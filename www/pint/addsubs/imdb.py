@@ -1,8 +1,13 @@
 import requests
 import urllib
 
+class Movie():
+	def __init__(self, title, year, director):
+		self.title = title
+		self.year = year
+		self.director = director
 
-class MovieInformation():
+class Imdb():
 	server = 'http://www.omdbapi.com/?'
 
 	def __init__(self, title):
@@ -22,14 +27,7 @@ class MovieInformation():
 		except:
 			return "Server failed"
 
-	def saveInformation(self, data):
-		title = data["Title"]
-		year = data["Year"]
-		director = data["Director"]
-		movie=Movie(title=title,director=director,year=year)
-		movie.save()
-
-
 	def main(self):
 		data = self.recoverInformation()
-		self.saveInformation(data)
+		movie = Movie(data["Title"], data["Year"], director["Director"])
+		return movie

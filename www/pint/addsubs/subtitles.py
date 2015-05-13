@@ -1,5 +1,7 @@
 import requests
 import urllib
+from imdb import Movie
+from imdb import Imdb
 #import eventlet
 
 class MovieInformation():
@@ -51,7 +53,7 @@ class MovieInformation():
 			if request.status_code == 200:
 				return request.text
 			elif request.status_code == 404:
-				return "Not avaliable"
+				return "Not available"
 			elif request.status_code == 400:
 				return "Malformed request"
 		except:
@@ -59,11 +61,14 @@ class MovieInformation():
 
 
 	def main(self):
-		return 'hello'
-		#self.hash = self.get_hash()
-		#answer = self.check()
-		#if answer != "Result failed" and answer != "Server failed":
-		#	subtitles = self.download()
-		#	return subtitles
-		#else:
-		#	return answer
+		self.hash = self.get_hash()
+		answer = self.check()
+		if answer != "Result failed" and answer != "Server failed":
+			subtitles = self.download()
+			if subtitles != "Not available" and subtitles != "Malformed request":
+				imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
+				information = imdb.main()
+				#agregar informacion a subtitulos
+				return subtitles
+		else:
+			return answer
