@@ -4,3 +4,33 @@
 {% if form.errors %}
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
+        <div id="contact-area">
+
+			<form method="post" action="">
+				{% csrf_token %}
+				<label for="Font">Font:</label>
+				<input type="text" name="Font" id="Font" placeholder="Font to be used in subtitles (must be installed)" />
+
+				<label for="Size">Size:</label>
+				<input type="number" name="Size" id="Size" placeholder="Size of the font" />
+				
+				<label for="Delay">Delay:</label>
+				<input type="number" name="Delay" id="Delay" placeholder="+/- seconds of delay in the subtitles" />
+
+				<label for="Add">Add Subs:</label>
+				<input type="radio" name="add" value="yes" checked>Yes
+				<br>
+				<input type="radio" name="add" value="no">No
+				
+				<label for="Autoplay">Auto Play in VLC:</label>
+				<input type="radio" name="add" value="yes" checked>Yes
+				<br>
+				<input type="radio" name="add" value="no">No
+
+				<input type="submit" name="submit" value="Submit" class="submit-button" />
+			</form>
+
+			<div style="clear: both;"></div>
+
+		</div>
+{% endblock %}
