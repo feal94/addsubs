@@ -1,19 +1,14 @@
 import requests
 import urllib
-<<<<<<< HEAD
 import os
 import hashlib
-=======
 from imdb import Movie
 from imdb import Imdb
 #import eventlet
->>>>>>> 55e945a241ecf6dd556701abf6b2fbc9d4d5ff8f
 
 class MovieInformation():
 	#server = 'http://api.thesubdb.com/?action='
 	server = 'http://sandbox.thesubdb.com/?action='
-
-<<<<<<< HEAD
 	def __init__(self, name, lang):
 		self.language= lang
 		self.name = name
