@@ -67,7 +67,7 @@ class MovieInformation():
 		if answer != "Result failed" and answer != "Server failed":
 			if self.language in answer:			
 				subtitles = self.download()
-				ifsubtitles != "Malformed request":
+				if subtitles != "Malformed request":
 					imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
 					information = imdb.main()
 				#agregar informacion a subtitulos
