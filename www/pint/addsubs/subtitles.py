@@ -1,19 +1,15 @@
 import requests
 import urllib
-<<<<<<< HEAD
 import os
 import hashlib
-=======
 from imdb import Movie
 from imdb import Imdb
 #import eventlet
->>>>>>> 55e945a241ecf6dd556701abf6b2fbc9d4d5ff8f
 
 class MovieInformation():
 	#server = 'http://api.thesubdb.com/?action='
 	server = 'http://sandbox.thesubdb.com/?action='
 
-<<<<<<< HEAD
 	def __init__(self, name, lang):
 		self.language= lang
 		self.name = name
@@ -70,9 +66,9 @@ class MovieInformation():
 	def main(self):
 		answer = self.check()
 		if answer != "Result failed" and answer != "Server failed":
-			if self.language in answer:			
+			if self.language in answer:
 				subtitles = self.download()
-				ifsubtitles != "Malformed request":
+				if subtitles != "Malformed request":
 					imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
 					information = imdb.main()
 				#agregar informacion a subtitulos
