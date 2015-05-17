@@ -30,7 +30,22 @@ def main(request):
 	#job_list=Job.objects.all()
 	job_list = []
 	context={'job_list':job_list}
-	return render(request,'addsubs/main.html',context) # De momento redirecciona a la misma pagina, pero en un futuro redirigira a otra
+	return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+
+def options(request):
+	if request.POST.has_key('Font'):
+		font=request.POST['Font']
+	if request.POST.has_key('Size'): 
+		size=request.POST['Size']
+	if request.POST.has_key('Delay'): 
+		size=request.POST['Delay']
+	if request.POST.has_key('Add'): 
+		size=request.POST['Add']
+	if request.POST.has_key('Autoplay'): 
+		size=request.POST['Autoplay']
+	#Llenamos las opciones que haya pasado el usuario
+	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
+	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
 	if request.method == 'POST':  # If the form has been submitted...
