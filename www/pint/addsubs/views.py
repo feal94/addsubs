@@ -44,7 +44,7 @@ def options(request):
 	if request.POST.has_key('Autoplay'): 
 		size=request.POST['Autoplay']
 	#Llenamos las opciones que haya pasado el usuario
-	#Ahora tendríamos que hacer uso de esta acciones para añadir los subtitulos con memcoder
+	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
