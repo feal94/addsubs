@@ -28,20 +28,22 @@ def main(request):
 			sub = MovieInformation(path, language)
 			sub.main()
 	#job_list=Job.objects.all()
-	job_list = []
-	context={'job_list':job_list}
-	return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+			job_list = []
+			context={'job_list':job_list}
+			return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+	context= {'user': request.user}
+	return render(request,'addsubs/main.html',context)
 
 def options(request):
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
-	if request.POST.has_key('Size'): 
+	if request.POST.has_key('Size'):
 		size=request.POST['Size']
-	if request.POST.has_key('Delay'): 
+	if request.POST.has_key('Delay'):
 		size=request.POST['Delay']
-	if request.POST.has_key('Add'): 
+	if request.POST.has_key('Add'):
 		size=request.POST['Add']
-	if request.POST.has_key('Autoplay'): 
+	if request.POST.has_key('Autoplay'):
 		size=request.POST['Autoplay']
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
