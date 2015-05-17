@@ -20,7 +20,7 @@ class MovieInformation():
 
 	def get_hash(self):
 		readsize = 64 * 1024
-		with open(name, 'rb') as f:
+		with open(self.name, 'rb') as f:
 			size = os.path.getsize(self.name)
 			data = f.read(readsize)
 			f.seek(-readsize, os.SEEK_END)
