@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from signup import SignUpForm
 from subtitles import MovieInformation
 from django.contrib.auth.decorators import login_required
+import os.path
 
 
 def index(request):
@@ -18,19 +19,18 @@ def main(request):
 		#user=
 		path=request.POST['Path']
 		# Comprobar con expresiones regulares si es una ruta
-		# Comprobar si existe el video
-		#video = algo sobre el path
-		if request.POST.has_key('Language'):
-			language=request.POST['Language']
-			# Comprobar con expresiones regulares si es con el formato correcto
-			#job=Job(user='user',video='video',language='language',finished=False)
-			#job.save()
-			sub = MovieInformation(path, language)
-			sub.main()
-	#job_list=Job.objects.all()
-			job_list = []
-			context={'job_list':job_list}
-			return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+		if os.path.exists(path):
+			if request.POST.has_key('Language'):
+				language=request.POST['Language']
+				# Comprobar con expresiones regulares si es con el formato correcto
+				#job=Job(user='user',video='video',language='language',finished=False)
+				#job.save()
+				sub = MovieInformation(path, language)
+				sub.main()
+				#job_list=Job.objects.all()
+				job_list = []
+				context={'job_list':job_list}
+				return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
 	context= {'user': request.user}
 	return render(request,'addsubs/main.html',context)
 
