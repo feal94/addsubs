@@ -46,6 +46,7 @@ form {
 	margin-left:auto; 
 	margin-right:auto;
 	padding: 0;
+	text-align: center; 
 }
 
 body {
@@ -94,6 +95,7 @@ p {
 #contact-area input.submit-button {
 	width: 100px;
 	float: right;
+
 }
 
 label {
@@ -103,6 +105,23 @@ label {
 	width: 100px;
 	padding-top: 5px;
 	font-size: 1.4em;
+}
+#center{
+	text-align: center; 
+}
+/********************** RADIO *********************************/
+.radio-label {
+
+}
+.radio-input {
+
+
+}
+fieldset {
+    text-align: center;
+}
+#radio {
+
 }
 
 /* ----------------------------------------------------- */

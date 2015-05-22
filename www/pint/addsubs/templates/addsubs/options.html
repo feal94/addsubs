@@ -5,7 +5,6 @@
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
         <div id="contact-area">
-
 			<form method="post" action="">
 				{% csrf_token %}
 				<label for="Font">Font:</label>
@@ -18,18 +17,26 @@
 				<input type="number" name="Delay" id="Delay" placeholder="+/- seconds of delay in the subtitles" />
 
 				<label for="Add">Add Subs:</label>
+				<fieldset>
+				<div id="radio">
 				<input type="radio" name="add" value="yes" checked>Yes
 				<br>
 				<input type="radio" name="add" value="no">No
+				</div>
+				</fieldset>
 				
+			
 				<label for="Autoplay">Auto Play in VLC:</label>
-				<input type="radio" name="add" value="yes" checked>Yes
+				<fieldset>
+				<input type="radio" name="auto" value="yes" checked>Yes
 				<br>
-				<input type="radio" name="add" value="no">No
-
+				<input type="radio" name="auto" value="no">No
+				</div>
+				</fieldset>
+				<div class="center">
 				<input type="submit" name="submit" value="Submit" class="submit-button" />
+				</div>
 			</form>
-
 			<div style="clear: both;"></div>
 
 		</div>
