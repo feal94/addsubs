@@ -16,8 +16,3 @@ class mencoder():
 			
 	def play(self,output):
 		os.system("mplayer "+output)
-
-video="/home/alvarofeal/Desktop/prueba.avi"
-subtitles="/home/alvarofeal/Desktop/subtitles.srt"
-
-os.system("mplayer /home/alvarofeal/Desktop/addsubs.avi")
