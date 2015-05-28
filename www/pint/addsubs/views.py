@@ -24,12 +24,6 @@ def main(request):
 				sub = Main(path, language)
 				answer = sub.main()
 				if answer != None:
-					try:
-						f = open("addsubs.srt",'w')
-						f.write(answer.encode("utf-8"))
-						f.close()
-					except IOError:
-						return "Could not open file"
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
 					job_list = Job.objects.all()
