@@ -5,14 +5,14 @@
         <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
         <div id="contact-area">
-			<form method="post" action="">
+			<form method="post" action="{% url 'options' %}">
 				{% csrf_token %}
 				<label for="Font">Font:</label>
 				<input type="text" name="Font" id="Font" placeholder="Font to be used in subtitles (must be installed)" />
 
 				<label for="Size">Size:</label>
 				<input type="number" name="Size" id="Size" placeholder="Size of the font" />
-				
+
 				<label for="Delay">Delay:</label>
 				<input type="number" name="Delay" id="Delay" placeholder="+/- seconds of delay in the subtitles" />
 
@@ -24,8 +24,8 @@
 				<input type="radio" name="add" value="no">No
 				</div>
 				</fieldset>
-				
-			
+
+
 				<label for="Autoplay">Auto Play in VLC:</label>
 				<fieldset>
 				<input type="radio" name="auto" value="yes" checked>Yes
