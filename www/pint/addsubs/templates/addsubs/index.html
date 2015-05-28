@@ -6,7 +6,7 @@
 
 
         <div id="contact-area">
-		<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+		<form action="{% url 'django.contrib.auth.views.login' %}" method="post">
 		 {% csrf_token %}
 		<table>
             <tr>

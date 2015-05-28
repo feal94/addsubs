@@ -2,13 +2,14 @@ import requests
 import urllib
 import os
 import hashlib
-from imdb import Movie
+from imdb import MovieInformation
 from imdb import Imdb
+from addsubs.models import Movie
 #import eventlet
 import Queue
 import threading
 
-class MovieInformation():
+class Main():
 	#server = 'http://api.thesubdb.com/?action='
 	server = 'http://sandbox.thesubdb.com/?action='
 	queue = Queue.Queue()
@@ -88,8 +89,10 @@ class MovieInformation():
 				if subtitles != "Malformed request":
 					imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
 					information = imdb.main()
-				#agregar informacion a subtitulos
-					return subtitles
-			else:
-				return answer
-
+					if information != None:
+						#agregar informacion a subtitulos
+						#Guardamos los subtitulos en un fichero
+						movie = Movie(title=information.title, director=information.director, year=information.year, hash=self.hash)
+						movie.save()
+						return movie
+		return None

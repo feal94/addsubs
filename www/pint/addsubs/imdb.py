@@ -3,7 +3,7 @@ import urllib
 import Queue
 import threading
 
-class Movie():
+class MovieInformation():
 	def __init__(self, title, year, director):
 		self.title = title
 		self.year = year
@@ -25,9 +25,14 @@ class Imdb():
 			request = requests.get(url)
 			if request.status_code == 200:
 				answer = (request.text)
+
 				if answer["Response"] == "True": 
 					self.queue.put(answer)
 					return
+
+				if answer["Response"] == "True":
+					return answer
+
 				else:
 					self.queue.put("Not found")
 					return 
@@ -43,9 +48,8 @@ class Imdb():
 		t.start()
 		t.join()
 		data = self.queue.get()
-		#data = self.recoverInformation()
-		if data != "Server failed" and data != "Result failed" and data != "Not found": 
-			movie = Movie(data["Title"], data["Year"], director["Director"])
+		if data != "Server failed" and data != "Result failed" and data != "Not found":
+			movie = MovieInformation(data["Title"], data["Year"], director["Director"])
 			return movie
 		else:
-			return "Fallo en IMBD"
+			return None

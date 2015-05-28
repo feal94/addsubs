@@ -13,7 +13,7 @@ class Movie(models.Model):
 
 
 class Job(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User, unique=True)
 	video = models.ForeignKey(Movie)
 	language = models.CharField(max_length=100)
 	delay = models.IntegerField()
