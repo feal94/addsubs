@@ -26,7 +26,13 @@ def main(request):
 				#job=Job(user='user',video='video',language='language',finished=False)
 				#job.save()
 				sub = MovieInformation(path, language)
-				sub.main()
+				try:
+					f = open("addsubs.srt",'w')
+					subtitles = sub.main()
+					f.write(subtitles)
+					f.close()
+				except IOError: 
+					return "Could not open file"
 				#job_list=Job.objects.all()
 				job_list = []
 				context={'job_list':job_list}

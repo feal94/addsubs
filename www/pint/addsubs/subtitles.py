@@ -71,7 +71,6 @@ class MovieInformation():
 				if subtitles != "Malformed request":
 					imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
 					information = imdb.main()
-				#agregar informacion a subtitulos
 					return subtitles
 			else:
 				return answer
