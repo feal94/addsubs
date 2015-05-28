@@ -4,15 +4,13 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import User
 from signup import SignUpForm
-from subtitles import MovieInformation
 from mencoder import Mencoder
+from subtitles import Main
 from django.contrib.auth.decorators import login_required
+from addsubs.models import Movie
+from addsubs.models import Job
 import os.path
 
-
-def index(request):
-	context= {'user': request.user}
-	return render(request,'addsubs/main.html',context)
 
 @login_required()
 def main(request):
@@ -24,22 +22,16 @@ def main(request):
 			if request.POST.has_key('Language'):
 				language=request.POST['Language']
 				# Comprobar con expresiones regulares si es con el formato correcto
-				#job=Job(user='user',video='video',language='language',finished=False)
-				#job.save()
-				sub = MovieInformation(self.path, language)
-				try:
-					f = open("addsubs.srt",'w')
-					subtitles = sub.main()
-					f.write(subtitles.encode("utf-8"))
-					f.close()
-				except IOError: 
-					return "Could not open file"
-				#job_list=Job.objects.all()
-				job_list = []
-				context={'job_list':job_list}
-				return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
-	context= {'user': request.user}
-	return render(request,'addsubs/main.html',context)
+				sub = Main(path, language)
+				answer = sub.main()
+				if answer != None:
+					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
+					job.save()
+					job_list = Job.objects.all()
+					context={'job_list':job_list}
+					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+	#context= {'user': request.user}
+	#return render(request,'addsubs/main.html',context)
 
 def options(request):
 	font=size=delay=add=autoplay= None

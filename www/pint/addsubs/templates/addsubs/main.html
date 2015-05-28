@@ -7,7 +7,7 @@
 
         <div id="contact-area">
 
-			<form method="post" action="">
+			<form action="{% url 'main' %}" method="post" >
 				{% csrf_token %}
 				<label for="Path">Path:</label>
 				<input type="text" name="Path" id="Path" placeholder="Path to the file" />
