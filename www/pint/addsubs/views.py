@@ -49,6 +49,7 @@ def options(request):
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	men = Mencoder()
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
+	context=None
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
