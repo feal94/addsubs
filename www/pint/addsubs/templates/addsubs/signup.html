@@ -5,10 +5,8 @@
         <p>{{ form.errors }}</p>
     {% endif %}
 	 <div id="contact-area">
-    <form method="post" action="{% url 'signup' %}">
-
+    <form action="{% url 'signup' %}" method="post" >
         {% csrf_token %}
-
         <table>
             <tr>
                 <td>{{ form.username.label_tag }}</td>

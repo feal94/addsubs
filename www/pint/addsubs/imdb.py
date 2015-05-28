@@ -1,7 +1,7 @@
 import requests
 import urllib
 
-class Movie():
+class MovieInformation():
 	def __init__(self, title, year, director):
 		self.title = title
 		self.year = year
@@ -21,7 +21,7 @@ class Imdb():
 			request = requests.get(url)
 			if request.status_code == 200:
 				answer = (request.text)
-				if answer["Response"] == "True": 
+				if answer["Response"] == "True":
 					return answer
 				else:
 					return "Not found"
@@ -32,8 +32,8 @@ class Imdb():
 
 	def main(self):
 		data = self.recoverInformation()
-		if data != "Server failed" and data != "Result failed" and data != "Not found": 
-			movie = Movie(data["Title"], data["Year"], director["Director"])
+		if data != "Server failed" and data != "Result failed" and data != "Not found":
+			movie = MovieInformation(data["Title"], data["Year"], director["Director"])
 			return movie
 		else:
-			return "Fallo en IMBD"
+			return None
