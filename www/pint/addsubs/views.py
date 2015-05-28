@@ -5,6 +5,7 @@ from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import User
 from signup import SignUpForm
 from subtitles import MovieInformation
+from mencoder import Mencoder
 from django.contrib.auth.decorators import login_required
 import os.path
 
@@ -17,15 +18,15 @@ def index(request):
 def main(request):
 	if request.POST.has_key('Path'):
 		#user=
-		path=request.POST['Path']
+		self.path=request.POST['Path']
 		# Comprobar con expresiones regulares si es una ruta
-		if os.path.exists(path):
+		if os.path.exists(self.path):
 			if request.POST.has_key('Language'):
 				language=request.POST['Language']
 				# Comprobar con expresiones regulares si es con el formato correcto
 				#job=Job(user='user',video='video',language='language',finished=False)
 				#job.save()
-				sub = MovieInformation(path, language)
+				sub = MovieInformation(self.path, language)
 				try:
 					f = open("addsubs.srt",'w')
 					subtitles = sub.main()
@@ -41,18 +42,21 @@ def main(request):
 	return render(request,'addsubs/main.html',context)
 
 def options(request):
+	font=size=delay=add=autoplay= None
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
 		size=request.POST['Size']
 	if request.POST.has_key('Delay'):
-		size=request.POST['Delay']
+		delay=request.POST['Delay']
 	if request.POST.has_key('Add'):
-		size=request.POST['Add']
+		add=request.POST['Add']
 	if request.POST.has_key('Autoplay'):
-		size=request.POST['Autoplay']
+		autoplay=request.POST['Autoplay']
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
+	men = Mencoder()
+	men.addsubs(self.path,"addsubs.srt",font,size,delay,add,autoplay)
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
