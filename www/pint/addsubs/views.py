@@ -11,14 +11,14 @@ from addsubs.models import Movie
 from addsubs.models import Job
 import os.path
 
-
+path = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
 		#user=
-		self.path=request.POST['Path']
+		path=request.POST['Path']
 		# Comprobar con expresiones regulares si es una ruta
-		if os.path.exists(self.path):
+		if os.path.exists(path):
 			if request.POST.has_key('Language'):
 				language=request.POST['Language']
 				# Comprobar con expresiones regulares si es con el formato correcto
@@ -30,8 +30,8 @@ def main(request):
 					job_list = Job.objects.all()
 					context={'job_list':job_list}
 					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
-	#context= {'user': request.user}
-	#return render(request,'addsubs/main.html',context)
+	context= {'user': request.user}
+	return render(request,'addsubs/main.html',context)
 
 def options(request):
 	font=size=delay=add=autoplay= None
@@ -48,7 +48,7 @@ def options(request):
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	men = Mencoder()
-	men.addsubs(self.path,"addsubs.srt",font,size,delay,add,autoplay)
+	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
