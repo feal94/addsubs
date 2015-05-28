@@ -29,6 +29,7 @@ def main(request):
 				try:
 					f = open("addsubs.srt",'w')
 					subtitles = sub.main()
+					subtitles.encode('ascii', 'ignore')
 					f.write(subtitles)
 					f.close()
 				except IOError: 
