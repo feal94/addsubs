@@ -23,6 +23,13 @@ def main(request):
 				# Comprobar con expresiones regulares si es con el formato correcto
 				sub = Main(path, language)
 				answer = sub.main()
+				try:
+					f = open("addsubs.srt",'w')
+					subtitles = sub.main()
+					f.write(subtitles.encode("utf-8"))
+					f.close()
+				except IOError:
+					return "Could not open file"
 				if answer != None:
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
