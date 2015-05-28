@@ -4,13 +4,14 @@ from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import User
 from signup import SignUpForm
+from mencoder import Mencoder
 from subtitles import Main
 from django.contrib.auth.decorators import login_required
 from addsubs.models import Movie
 from addsubs.models import Job
 import os.path
 
-
+path = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
@@ -33,18 +34,21 @@ def main(request):
 	return render(request,'addsubs/main.html',context)
 
 def options(request):
+	font=size=delay=add=autoplay= None
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
 		size=request.POST['Size']
 	if request.POST.has_key('Delay'):
-		size=request.POST['Delay']
+		delay=request.POST['Delay']
 	if request.POST.has_key('Add'):
-		size=request.POST['Add']
+		add=request.POST['Add']
 	if request.POST.has_key('Autoplay'):
-		size=request.POST['Autoplay']
+		autoplay=request.POST['Autoplay']
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
+	men = Mencoder()
+	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
