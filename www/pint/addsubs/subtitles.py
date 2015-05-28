@@ -14,9 +14,9 @@ class Main():
 	queue = Queue.Queue()
 
 	def __init__(self, name, lang):
-		self.language= lang
-		self.name = name
-		self.user_agent= {
+		self.language = lang
+		self.name = name # falta eliminarle la ruta
+		self.user_agent = {
 			'User-Agent': 'SubDB/1.0 (AddSubs/1.0;https://github.com/feal94/addsubs)'
 		}
 		self.hash= self.get_hash()
@@ -86,11 +86,14 @@ class Main():
 				t.join()
 				subtitles = self.queue.get()
 				if subtitles != "Malformed request":
-					imdb = Imdb(self.name)  #aqui falta elmiminar antes la ruta
+					imdb = Imdb(self.name)
 					information = imdb.main()
 					if information != None:
 						#agregar informacion a subtitulos
-						movie = Movie(title=information.title, director=information.director, year=information.year, hash=self.hash)
+						movie = Movie(title=self.name, director=information.director, year=information.year, hash=self.hash)
+						movie.save()
+					else:
+						movie = Movie(title=self.name, hash=self.hash)
 						movie.save()
 					try:
 						f = open("addsubs.srt",'w')
