@@ -16,9 +16,9 @@ class Job(models.Model):
 	user = models.ForeignKey(User, unique=True)
 	video = models.ForeignKey(Movie)
 	language = models.CharField(max_length=100)
-	delay = models.IntegerField(default=0)
-	play = models.BooleanField(default=False)
-	finished = models.BooleanField(default=False)
+	delay = models.IntegerField(null=True)
+	play = models.BooleanField()
+	finished = models.BooleanField()
 
 	def __unicode__(self):
 		return self.user + ": " + self.video

@@ -25,7 +25,7 @@ def main(request):
 				sub = Main(path, language)
 				answer = sub.main()
 				if answer != None:
-					job = Job(user=request.user,video=answer,language=language)
+					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
 					job_list = Job.objects.all()
 					context={'job_list':job_list}
