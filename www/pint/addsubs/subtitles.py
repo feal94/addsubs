@@ -15,7 +15,7 @@ class Main():
 
 	def __init__(self, name, lang):
 		self.language = lang
-		self.name = name # falta eliminarle la ruta
+		self.name = name
 		self.user_agent = {
 			'User-Agent': 'SubDB/1.0 (AddSubs/1.0;https://github.com/feal94/addsubs)'
 		}
