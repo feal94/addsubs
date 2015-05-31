@@ -5,7 +5,7 @@ import sys
 class Mencoder():
 	
 	def addsubs(self, video, subtitles,font,delay,add,size,autoplay):
-		output="new"+video
+		output="/home/alvarofeal/Desktop/prueba_sub.avi"
 		if add=='No':
 			return None
 		if (size is None):
