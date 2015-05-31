@@ -34,7 +34,6 @@ def main(request):
 	return render(request,'addsubs/main.html',context)
 
 def options(request):
-	font=size=delay=add=autoplay= None
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
@@ -48,10 +47,9 @@ def options(request):
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	men = Mencoder()
-	print "path: " + path
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	context=None
-	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
+	return render(request,'addsubs/main.html',context) # Volvemos al principioo
 
 def signup(request):
 	if request.method == 'POST':  # If the form has been submitted...
