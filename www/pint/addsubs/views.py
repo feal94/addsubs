@@ -38,7 +38,6 @@ def main(request):
 def options(request):
 	font=size=delay=add=autoplay= None
 	job = Job.objects.get(id=job_id)
-
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
@@ -53,12 +52,11 @@ def options(request):
 		autoplay=request.POST['Autoplay']
 	job.save
 	men = Mencoder()
-	print "path: " + path
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	job.finished=True
 	job.save
 	context=None
-	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
+	return render(request,'addsubs/main.html',context) # Volvemos al principioo
 
 def signup(request):
 	if request.method == 'POST':
