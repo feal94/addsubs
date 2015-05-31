@@ -12,20 +12,18 @@ class MovieInformation():
 class Imdb():
 	server = 'http://www.omdbapi.com/?'
 	queue = Queue.Queue()
-	
+
 	def __init__(self, title):
 		self.title = title
 
 	def recoverInformation(self):
-		#method = 'GET'
-		#timeout = 500
 		url = self.server + 't=' + self.title + '&y=&plot=short&r=json'
 		try:
 			request = requests.get(url)
 			if request.status_code == 200:
 				answer = (request.text)
 
-				if answer["Response"] == "True": 
+				if answer["Response"] == "True":
 					self.queue.put(answer)
 					return
 
@@ -34,13 +32,13 @@ class Imdb():
 
 				else:
 					self.queue.put("Not found")
-					return 
+					return
 			else:
 				self.queue.put("Result failed")
-				return 
+				return
 		except:
 			self.queue.put("Server failed")
-			return 
+			return
 
 	def main(self):
 		t = threading.Thread(target = self.recoverInformation)
