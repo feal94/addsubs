@@ -12,6 +12,7 @@ from addsubs.models import Job
 import os.path
 
 path = ""
+job_id = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
@@ -27,32 +28,38 @@ def main(request):
 				if answer != None:
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
-					job_list = Job.objects.all()
-					context={'job_list':job_list}
+					global job_id
+					job_id=job.id
+					context={'job':job}
 					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
 	context= {'user': request.user}
 	return render(request,'addsubs/main.html',context)
 
 def options(request):
+	font=size=delay=add=autoplay= None
+	job = Job.objects.get(id=job_id)
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
 		size=request.POST['Size']
 	if request.POST.has_key('Delay'):
 		delay=request.POST['Delay']
+		job.delay = delay
 	if request.POST.has_key('Add'):
 		add=request.POST['Add']
 	if request.POST.has_key('Autoplay'):
+		job.play = True
 		autoplay=request.POST['Autoplay']
-	#Llenamos las opciones que haya pasado el usuario
-	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
+	job.save
 	men = Mencoder()
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
+	job.finished=True
+	job.save
 	context=None
 	return render(request,'addsubs/main.html',context) # Volvemos al principioo
 
 def signup(request):
-	if request.method == 'POST':  # If the form has been submitted...
+	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
 			username = form.cleaned_data["username"]
@@ -60,7 +67,7 @@ def signup(request):
 			user = User.objects.create_user(username=username, password=password)
 			user.save()
 
-			return HttpResponseRedirect(reverse('main'))  # Redirect after POST
+			return HttpResponseRedirect(reverse('main'))
 	else:
 		form = SignUpForm()
 

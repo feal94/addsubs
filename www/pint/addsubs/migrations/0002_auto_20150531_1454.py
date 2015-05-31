@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('addsubs', '0002_auto_20150528_1840'),
+        ('addsubs', '0001_initial'),
     ]
 
     operations = [
@@ -17,13 +17,13 @@ class Migration(migrations.Migration):
             field=models.IntegerField(null=True),
         ),
         migrations.AlterField(
-            model_name='job',
-            name='finished',
-            field=models.BooleanField(),
+            model_name='movie',
+            name='director',
+            field=models.CharField(max_length=50, null=True),
         ),
         migrations.AlterField(
-            model_name='job',
-            name='play',
-            field=models.BooleanField(),
+            model_name='movie',
+            name='year',
+            field=models.IntegerField(null=True),
         ),
     ]
