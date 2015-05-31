@@ -12,6 +12,7 @@ from addsubs.models import Job
 import os.path
 
 path = ""
+job_id = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
@@ -27,6 +28,8 @@ def main(request):
 				if answer != None:
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
+					global job_id
+					job_id=job.id
 					context={'job':job}
 					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
 	context= {'user': request.user}
@@ -34,19 +37,26 @@ def main(request):
 
 def options(request):
 	font=size=delay=add=autoplay= None
+	job = Job.objects.get(id=job_id)
+
 	if request.POST.has_key('Font'):
 		font=request.POST['Font']
 	if request.POST.has_key('Size'):
 		size=request.POST['Size']
 	if request.POST.has_key('Delay'):
 		delay=request.POST['Delay']
+		job.delay = delay
 	if request.POST.has_key('Add'):
 		add=request.POST['Add']
 	if request.POST.has_key('Autoplay'):
+		job.play = True
 		autoplay=request.POST['Autoplay']
+	job.save
 	men = Mencoder()
 	print "path: " + path
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
+	job.finished=True
+	job.save
 	context=None
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
