@@ -19,7 +19,6 @@ class Imdb():
 	def recoverInformation(self):
 		#method = 'GET'
 		#timeout = 500
-		print "Entrar entra, A ver"
 		url = self.server + 't=' + self.title + '&y=&plot=short&r=json'
 		try:
 			request = requests.get(url)
