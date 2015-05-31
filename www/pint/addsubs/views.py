@@ -26,8 +26,7 @@ def main(request):
 				if answer != None:
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
-					job_list = Job.objects.all()
-					context={'job_list':job_list}
+					context={'job':job}
 					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
 	context= {'user': request.user}
 	return render(request,'addsubs/main.html',context)
@@ -44,15 +43,13 @@ def options(request):
 		add=request.POST['Add']
 	if request.POST.has_key('Autoplay'):
 		autoplay=request.POST['Autoplay']
-	#Llenamos las opciones que haya pasado el usuario
-	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	men = Mencoder()
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	context=None
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
 
 def signup(request):
-	if request.method == 'POST':  # If the form has been submitted...
+	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
 			username = form.cleaned_data["username"]
@@ -60,7 +57,7 @@ def signup(request):
 			user = User.objects.create_user(username=username, password=password)
 			user.save()
 
-			return HttpResponseRedirect(reverse('main'))  # Redirect after POST
+			return HttpResponseRedirect(reverse('main'))
 	else:
 		form = SignUpForm()
 
