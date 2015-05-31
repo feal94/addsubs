@@ -15,7 +15,6 @@ path = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
-		#user=
 		path=request.POST['Path']
 		# Comprobar con expresiones regulares si es una ruta
 		if os.path.exists(path):
