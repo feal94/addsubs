@@ -15,6 +15,7 @@ path = ""
 @login_required()
 def main(request):
 	if request.POST.has_key('Path'):
+		global path
 		path=request.POST['Path']
 		# Comprobar con expresiones regulares si es una ruta
 		if os.path.exists(path):
@@ -47,6 +48,7 @@ def options(request):
 	#Llenamos las opciones que haya pasado el usuario
 	#Ahora tendriamos que hacer uso de esta acciones para anadir los subtitulos con memcoder
 	men = Mencoder()
+	print "path: " + path
 	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 	context=None
 	return render(request,'addsubs/options.html',context) # Llevamos a la misma pagina por ahora
