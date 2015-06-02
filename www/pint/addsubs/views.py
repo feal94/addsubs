@@ -35,6 +35,7 @@ def main(request):
 	context= {'user': request.user}
 	return render(request,'addsubs/main.html',context)
 
+@login_required()
 def options(request):
 	font=size=delay=add=autoplay= None
 	job = Job.objects.get(id=job_id)
