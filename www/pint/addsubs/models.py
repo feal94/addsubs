@@ -21,4 +21,4 @@ class Job(models.Model):
 	finished = models.BooleanField()
 
 	def __unicode__(self):
-		return self.user + ": " + self.video
+		return self.user.username + ": " + self.video.title
