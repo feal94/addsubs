@@ -91,7 +91,7 @@ class Main():
 					if information != None:
 						#agregar informacion a subtitulos
 						subtitles = "00:00:1,0 --> 00:00:20,0\nTitle: " + information.title + "\n Director:" + information.director + "\n Year:" + information.year + "\n \n" + subtitles
-						movie = Movie(title=self.name, director=information.director, year=information.year, hash=self.hash)
+						movie = Movie(title=information.title, director=information.director, year=information.year, hash=self.hash)
 						movie.save()
 					else:
 						movie = Movie(title=self.name, hash=self.hash)
