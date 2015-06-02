@@ -6,13 +6,15 @@ html, body {
     background-color: #FF8D00;
 }
 
-div#wrapper {
+div#wrapper{
+    margin:0; padding: 0;
     min-height: 100%;
     position: relative;
 }
 
 header {
-    top: 0;
+    margin:0; padding: 0;
+    width: 100%;
     background-color: dimgray;
 }
 
@@ -23,17 +25,21 @@ header h1 {
     color: white;
 }
 
-img{ 
-	height: 15%; 
-	width: 15%; 	
+div#error-message{
+	margin-top: 9%;
+}
+
+img{
+	height: 15%;
+	width: 15%;
 }
 #logo{
-	position: absolute; 
-	top: 0; 
-	left: 0; 
-	margin: 0 auto; 
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0 auto;
 }
-/* ---------------- Form ------------------------------- */ 
+/* ---------------- Form ------------------------------- */
 
 /*
 form {
@@ -43,49 +49,23 @@ form {
     width: 25%;
 }*/
 * {
-	margin-left:auto; 
+	margin-left:auto;
 	margin-right:auto;
 	padding: 0;
-	text-align: center; 
-}
-
-body {
-	font-size: 62.5%;
-	font-family: Helvetica, sans-serif;
-	background: url(images/stripe.png) repeat;
-}
-
-p {
-	font-size: 1.3em;
-	margin-bottom: 15px;
-}
-
-#page-wrap {
-	width: 660px;
-	background: white;
-	padding: 20px 50px 20px 50px;
-	margin: 20px auto;
-	min-height: 500px;
-	height: auto !important;
-	height: 500px;
+	text-align: center;
 }
 
 #contact-area {
-	width: 600px;
-	margin-top: 25px;
+	width: 46%;
+	margin-top: 10%;
+	font-size: 62.5%;
 }
 
 #contact-area input, #contact-area textarea {
 	padding: 5px;
-	width: 471px;
-	font-family: Helvetica, sans-serif;
-	font-size: 1.4em;
-	margin: 0px 0px 10px 0px;
+	margin-top: 10px;
+	width: 470px;
 	border: 2px solid #ccc;
-}
-
-#contact-area textarea {
-	height: 90px;
 }
 
 #contact-area textarea:focus, #contact-area input:focus {
@@ -93,9 +73,9 @@ p {
 }
 
 #contact-area input.submit-button {
-	width: 100px;
+	width: 15%;
 	float: right;
-
+	margin-top: 10px;
 }
 
 label {
@@ -106,9 +86,7 @@ label {
 	padding-top: 5px;
 	font-size: 1.4em;
 }
-#center{
-	text-align: center; 
-}
+
 /********************** RADIO *********************************/
 .radio-label {
 
@@ -127,11 +105,11 @@ fieldset {
 /* ----------------------------------------------------- */
 
 footer {
-    position: absolute; /* footer always on the bottom */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4em;
+	position: absolute; /* footer always on the bottom */
+	bottom: 0;
+	left: 0;
+	width: 100%;
+   	height: 3.5em;
     background-color: lightgray;
     color: dimgray;
     text-align: center;

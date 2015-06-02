@@ -41,7 +41,7 @@ def main(request):
 @login_required()
 def options(request):
 	font=size=delay=add=autoplay= None
-	if job_id != "":
+	if job_id != "": # Si se entra directamente aunque se este logeado no hay trabajo que hacer
 		job = Job.objects.get(id=job_id)
 		if request.POST.has_key('Font'):
 			font=request.POST['Font']
