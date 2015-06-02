@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% if job_list %}
+		<ul>
+		{% for p in job_list %}
+			<li> Video: {{p.video}} Language: {{p.language}} Delay: {{p.delay}} Play: {{p.play}} Finished: {{p.finished}} </li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p> No jobs</p>
+	{% endif %}
+{% endblock %}
