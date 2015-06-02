@@ -30,9 +30,12 @@ def main(request):
 					job.save()
 					global job_id
 					job_id=job.id
-					context={'job':job}
+					context={'user':request.user}
 					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
-	context= {'user': request.user}
+				else:
+					context = {'error': 404}
+					return render(request,'addsubs/main.html',context)
+	context = {'error': None}
 	return render(request,'addsubs/main.html',context)
 
 @login_required()

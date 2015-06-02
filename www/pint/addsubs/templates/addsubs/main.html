@@ -21,4 +21,9 @@
 			<div style="clear: both;"></div>
 
 		</div>
+
+		{% if error %}
+			<p><strong>Subtitles not found. Please, try with another video file</strong></p>
+		{% endif %}
+
 {% endblock %}
