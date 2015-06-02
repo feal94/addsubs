@@ -9,7 +9,7 @@ class Movie(models.Model):
 	hash = models.CharField(max_length=200)
 
 	def __unicode__(self):
-		return self.title + ": " + self.year
+		return self.title
 
 
 class Job(models.Model):

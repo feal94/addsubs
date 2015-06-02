@@ -41,24 +41,25 @@ def main(request):
 @login_required()
 def options(request):
 	font=size=delay=add=autoplay= None
-	job = Job.objects.get(id=job_id)
-	if request.POST.has_key('Font'):
-		font=request.POST['Font']
-	if request.POST.has_key('Size'):
-		size=request.POST['Size']
-	if request.POST.has_key('Delay'):
-		delay=request.POST['Delay']
-		job.delay = delay
-	if request.POST.has_key('Add'):
-		add=request.POST['Add']
-	if request.POST.has_key('Autoplay'):
-		job.play = True
-		autoplay=request.POST['Autoplay']
-	job.save
-	men = Mencoder()
-	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
-	job.finished=True
-	job.save
+	if job_id != "":
+		job = Job.objects.get(id=job_id)
+		if request.POST.has_key('Font'):
+			font=request.POST['Font']
+		if request.POST.has_key('Size'):
+			size=request.POST['Size']
+		if request.POST.has_key('Delay'):
+			delay=request.POST['Delay']
+			job.delay = delay
+		if request.POST.has_key('Add'):
+			add=request.POST['Add']
+		if request.POST.has_key('Autoplay'):
+			job.play = True
+			autoplay=request.POST['Autoplay']
+		job.save
+		men = Mencoder()
+		men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
+		job.finished=True
+		job.save
 	context=None
 	return render(request,'addsubs/main.html',context) # Volvemos al principioo
 
