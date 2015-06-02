@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from addsubs.models import Movie
 from addsubs.models import Job
 import os.path
+import threading
 
 path = ""
 job_id = ""
@@ -57,7 +58,11 @@ def options(request):
 			autoplay=request.POST['Autoplay']
 		job.save
 		men = Mencoder()
-		men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
+		t = threading.Thread(target = men.addsubs,args=(path,"addsubs.srt",font,size,delay,add,autoplay))
+		t.start()
+		#t.join()
+		
+		#men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 		job.finished=True
 		job.save
 	context=None
