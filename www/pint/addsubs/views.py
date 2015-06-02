@@ -81,6 +81,6 @@ def signup(request):
 
 @login_required()
 def jobs(request):
-	job_list = Job.objects.get(user=request.user)
+	job_list = Job.objects.filter(user=request.user)
 	context = {'job_list':job_list}
 	return render(request,'addsubs/jobs.html',context)
