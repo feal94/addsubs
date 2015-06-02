@@ -33,8 +33,6 @@ class Main():
 
 	def check(self):
 		#This list all available languages for a movie
-		#method = 'GET'
-		timeout = 500
 		action = 'search'
 		hash = 'hash=' + self.hash
 		url = self.server + action + '&' + hash
@@ -52,8 +50,6 @@ class Main():
 
 
 	def download(self):
-		#method = 'GET'
-		timeout = 500
 		action = 'download'
 		hash = 'hash=' + self.hash
 		language = 'language=' + self.language
