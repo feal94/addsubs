@@ -2,6 +2,12 @@
 
 {% block content %}
 
+		<div id="UpperMenu" >
+			<ul>
+				<li> <a class="job" href="{% url 'jobs' %}">View jobs</a> </li>
+			</ul>
+		</div>
+
         <div id="contact-area">
 
 			<form action="{% url 'main' %}" method="post" >
