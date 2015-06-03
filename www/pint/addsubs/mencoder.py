@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os
 import sys
-import re 
+import re
 
 class Mencoder():
 
@@ -26,10 +26,10 @@ class Mencoder():
 		if delay != "":
 			delay_params = " -delay " + delay
 
-		#os.system(common_params + font_params + size_params + delay_params + " -o " + output + " " + video)
+		os.system(common_params + font_params + size_params + delay_params + " -o " + output + " " + video)
 
-		#if autoplay == 'yes':
-			#self.play(output)
+		if autoplay == 'yes':
+			self.play(output)
 
 	def play(self,output):
 		os.system("mplayer "+output)
