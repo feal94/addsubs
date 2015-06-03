@@ -2,6 +2,12 @@
 
 {% block content %}
 
+		<div id="UpperMenu" >
+			<ul>
+				<li> <a class="job" href="{% url 'jobs' %}">View jobs</a> </li>
+			</ul>
+		</div>
+
         <div id="contact-area">
 
 			<form action="{% url 'main' %}" method="post" >
@@ -23,7 +29,7 @@
 
 		{% if error %}
 			<div id="error-message"></div>
-			<p><strong>Subtitles not found. Please, try with another video file</strong></p>
+			<p><strong>Video/subtitles not found. Please, try again</strong></p>
 			</div>
 		{% endif %}
 

@@ -39,15 +39,7 @@ img{
 	left: 0;
 	margin: 0 auto;
 }
-/* ---------------- Form ------------------------------- */
 
-/*
-form {
-    margin: 0 auto;
-    padding: 10%;
-    background-color: #fff;
-    width: 25%;
-}*/
 * {
 	margin-left:auto;
 	margin-right:auto;
@@ -103,6 +95,27 @@ fieldset {
 }
 
 /* ----------------------------------------------------- */
+
+div#UpperMenu {
+    position: absolute;
+	right: 0;
+    text-align: right;
+    width: 6%;
+    font-weight: bold;
+    color: blue;
+    padding-right: 2%;
+}
+div#UpperMenu ul li {
+	list-style-type: none;
+}
+div#UpperMenu a:link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+div#UpperMenu a:link, a:visited{
+    text-decoration: none;
+    display: inline;
+}
 
 footer {
 	position: absolute; /* footer always on the bottom */
