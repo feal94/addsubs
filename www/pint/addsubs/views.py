@@ -61,8 +61,6 @@ def options(request):
 		t = threading.Thread(target = men.addsubs,args=(path,"addsubs.srt",font,size,delay,add,autoplay))
 		t.start()
 		#t.join()
-		
-		#men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
 		job.finished=True
 		job.save
 	context=None
