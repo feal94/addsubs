@@ -2,7 +2,7 @@ import requests
 import urllib
 import Queue
 import threading
-
+import re
 class MovieInformation():
 	def __init__(self, title, year, director):
 		self.title = title
@@ -17,6 +17,8 @@ class Imdb():
 		self.title = title
 
 	def recoverInformation(self):
+		self.title = re.sub(r'(.*\/)*', "",self.title)
+		self.title = re.sub(r'\..*', "",self.title)
 		url = self.server + 't=' + self.title + '&y=&plot=short&r=json'
 		try:
 			request = requests.get(url)
