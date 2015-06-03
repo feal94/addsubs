@@ -8,7 +8,7 @@
 		</ul>
 	</div>
 
-	{% if job_list %}
+
 		<div id="job_list">
 		<table class="job">
 			<tr>
@@ -18,20 +18,19 @@
 				<th>Play</th>
 				<th>Finished</th>
 			</tr>
-			{% for p in job_list %}
-				<tr>
-					<td> {{p.video}}</td>
-					<td>{{p.language}}</td>
-					<td>{{p.delay}}</td>
-					<td>{{p.play}}</td>
-					<td>{{p.finished}} </td>
-				</tr>
-			{% endfor %}
+			{% if job_list %}
+				{% for p in job_list %}
+					<tr>
+						<td> {{p.video}}</td>
+						<td>{{p.language}}</td>
+						<td>{{p.delay}}</td>
+						<td>{{p.play}}</td>
+						<td>{{p.finished}} </td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr><td colspan="5"> No jobs</td></tr>
+			{% endif %}
 		</table>
 		</div>
-	{% else %}
-		<div id="error-message">
-		<p> No jobs</p>
-		</div>
-	{% endif %}
 {% endblock %}
