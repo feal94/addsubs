@@ -117,6 +117,23 @@ div#UpperMenu a:link, a:visited{
     display: inline;
 }
 
+.job {
+  margin-top: 5%;
+  width: 75%;
+  border: 1px solid #000;
+  border-collapse: collapse;
+  background-color: lightgrey;
+}
+.job th, .job td {
+  border: 1px solid #000;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.job th {
+  background-color: dimgrey;
+  color: white;
+}
+
 footer {
 	position: absolute; /* footer always on the bottom */
 	bottom: 0;
