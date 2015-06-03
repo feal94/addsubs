@@ -1,36 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 	<div id="UpperMenu" >
 		<ul>
 			<li> <a href="{% url 'main' %}">Main</a> </li>
 		</ul>
 	</div>
 
-
-		<div id="job_list">
-		<table class="job">
-			<tr>
-				<th>Video</th>
-				<th>Language</th>
-				<th>Delay</th>
-				<th>Play</th>
-				<th>Finished</th>
-			</tr>
-			{% if job_list %}
-				{% for p in job_list %}
-					<tr>
-						<td> {{p.video}}</td>
-						<td>{{p.language}}</td>
-						<td>{{p.delay}}</td>
-						<td>{{p.play}}</td>
-						<td>{{p.finished}} </td>
-					</tr>
-				{% endfor %}
-			{% else %}
-				<tr><td colspan="5"> No jobs</td></tr>
-			{% endif %}
-		</table>
-		</div>
+	<table class="job">
+		<tr>
+			<th>Video</th>
+			<th>Language</th>
+			<th>Delay</th>
+			<th>Play</th>
+			<th>Finished</th>
+		</tr>
+		{% if job_list %}
+			{% for p in job_list %}
+				<tr>
+					<td>{{p.video}}</td>
+					<td>{{p.language}}</td>
+					<td>{{p.delay}}</td>
+					<td>{{p.play}}</td>
+					<td>{{p.finished}} </td>
+				</tr>
+			{% endfor %}
+		{% else %}
+			<tr><td colspan="5"> No jobs</td></tr>
+		{% endif %}
+	</table>
 {% endblock %}
