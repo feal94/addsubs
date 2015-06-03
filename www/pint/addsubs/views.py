@@ -15,6 +15,7 @@ path = ""
 job_id = ""
 @login_required()
 def main(request):
+	context = {'error': None}
 	if request.POST.has_key('Path'):
 		global path
 		path=request.POST['Path']
@@ -33,8 +34,6 @@ def main(request):
 					return render(request,'addsubs/options.html',None) # Llevamos a las siguientes opciones
 				else:
 					context = {'error': 404}
-					return render(request,'addsubs/main.html',context)
-	context = {'error': None}
 	return render(request,'addsubs/main.html',context)
 
 @login_required()
