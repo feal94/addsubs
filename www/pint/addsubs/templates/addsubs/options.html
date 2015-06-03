@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
         <div id="contact-area">
 			<form method="post" action="{% url 'options' %}">
 				{% csrf_token %}
@@ -25,7 +22,6 @@
 				</div>
 				</fieldset>
 
-
 				<label for="Autoplay">Auto Play in VLC:</label>
 				<fieldset>
 				<input type="radio" name="Autoplay" value="yes" checked>Yes
@@ -40,4 +36,6 @@
 			<div style="clear: both;"></div>
 
 		</div>
+		<p>When you submit the options you will be redirected to main menu. The application
+		will be working in background</p>
 {% endblock %}

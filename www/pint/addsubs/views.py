@@ -1,7 +1,6 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
-from django.core.urlresolvers import reverse
-from django.http.response import HttpResponseRedirect
 from django.contrib.auth.models import User
 from signup import SignUpForm
 from mencoder import Mencoder
@@ -31,8 +30,7 @@ def main(request):
 					job.save()
 					global job_id
 					job_id=job.id
-					context={'user':request.user}
-					return render(request,'addsubs/options.html',context) # Llevamos a las siguientes opciones
+					return render(request,'addsubs/options.html',None) # Llevamos a las siguientes opciones
 				else:
 					context = {'error': 404}
 					return render(request,'addsubs/main.html',context)
@@ -64,7 +62,7 @@ def options(request):
 		job.finished=True
 		job.save
 	context=None
-	return render(request,'addsubs/main.html',context) # Volvemos al principioo
+	return redirect('main')
 
 def signup(request):
 	if request.method == 'POST':
@@ -74,8 +72,7 @@ def signup(request):
 			password = form.cleaned_data["password"]
 			user = User.objects.create_user(username=username, password=password)
 			user.save()
-
-			return HttpResponseRedirect(reverse('main'))
+			return redirect('main')
 	else:
 		form = SignUpForm()
 
