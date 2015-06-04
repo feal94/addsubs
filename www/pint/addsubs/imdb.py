@@ -3,6 +3,9 @@ import urllib
 import Queue
 import threading
 import re
+import sys
+import json
+
 class MovieInformation():
 	def __init__(self, title, year, director):
 		self.title = title
@@ -20,17 +23,18 @@ class Imdb():
 		self.title = re.sub(r'(.*\/)*', "",self.title)
 		self.title = re.sub(r'\..*', "",self.title)
 		url = self.server + 't=' + self.title + '&y=&plot=short&r=json'
+		#print url
 		try:
 			request = requests.get(url)
 			if request.status_code == 200:
-				answer = (request.text)
-
-				if answer["Response"] == "True":
+				answer = json.loads((request.text))
+				#print answer['Response']
+				if answer['Response'] == "True":
 					self.queue.put(answer)
 					return
 
-				if answer["Response"] == "True":
-					return answer
+				#if answer["Response"] == "True":
+					#return answer
 
 				else:
 					self.queue.put("Not found")
@@ -38,7 +42,8 @@ class Imdb():
 			else:
 				self.queue.put("Result failed")
 				return
-		except:
+		except :
+			print sys.exc_info()[0]
 			self.queue.put("Server failed")
 			return
 
@@ -47,8 +52,9 @@ class Imdb():
 		t.start()
 		t.join()
 		data = self.queue.get()
+		#print data
 		if data != "Server failed" and data != "Result failed" and data != "Not found":
-			movie = MovieInformation(data["Title"], data["Year"], director["Director"])
+			movie = MovieInformation(data['Title'], data['Year'], data['Director'])
 			return movie
 		else:
 			return None
