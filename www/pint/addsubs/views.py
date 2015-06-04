@@ -19,7 +19,6 @@ def main(request):
 	if request.POST.has_key('Path'):
 		global path
 		path=request.POST['Path']
-		# Comprobar con expresiones regulares si es una ruta
 		if os.path.exists(path):
 			if request.POST.has_key('Language'):
 				language=request.POST['Language']
