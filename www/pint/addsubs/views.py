@@ -58,7 +58,7 @@ def do_job(request,job_id):
 		t = threading.Thread(target = men.addsubs,args=(path,"addsubs.srt",font,size,delay,add,autoplay))
 		t.start()
 		#t.join()
-		job.finished=True
+		job.finished="True"
 		job.save
 	context=None
 	return redirect('main')

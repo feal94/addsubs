@@ -8,7 +8,8 @@ class Mencoder():
 	def addsubs(self, video, subtitles,font,size,delay,add,autoplay):
 		output = video
 		output_list= re.split(r'(.*\/)*', output)
-		output=output_list[1]+"new_video.avi"
+		name=re.split(r'\.',output_list[2])
+		output=output_list[1]+name[0]+"_new."+name[1]
 		if add=='no':
 			return None
 
