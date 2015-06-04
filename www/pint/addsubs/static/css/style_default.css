@@ -53,6 +53,18 @@ img{
 	font-size: 62.5%;
 }
 
+div#options {
+	width: 50%;
+	margin-top: 4%;
+	font-size: 62.5%;
+}
+
+div#options input, div#options textarea {
+	width: 470px;
+	padding: 5px;
+	margin-top: 2%;
+}
+
 #contact-area input, #contact-area textarea {
 	padding: 5px;
 	margin-top: 10px;
@@ -60,7 +72,7 @@ img{
 	border: 2px solid #ccc;
 }
 
-#contact-area textarea:focus, #contact-area input:focus {
+#contact-area textarea:focus, #contact-area input:focus, #options textarea:focus, #options input:focus{
 	border: 2px solid #900;
 }
 
@@ -70,31 +82,30 @@ img{
 	margin-top: 10px;
 }
 
+#options input.submit-button {
+	width: 15%;
+	margin-top: 2%;
+	margin-left: 17%;
+}
+
 label {
 	float: left;
 	text-align: right;
 	margin-right: 15px;
 	width: 100px;
-	padding-top: 5px;
+	margin-top: 2.5%;
 	font-size: 1.4em;
 }
 
-/********************** RADIO *********************************/
-.radio-label {
-
+div#radio_section {
+	margin-top: 3%;
 }
-.radio-input {
 
-
-}
 fieldset {
+    margin-top: 2%;
     text-align: center;
+    width: 10%;
 }
-#radio {
-
-}
-
-/* ----------------------------------------------------- */
 
 div#UpperMenu {
     position: absolute;

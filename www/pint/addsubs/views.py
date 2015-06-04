@@ -12,7 +12,6 @@ import os.path
 import threading
 
 path = ""
-job_id = ""
 @login_required()
 def main(request):
 	context = {'error': None}
@@ -28,17 +27,19 @@ def main(request):
 				if answer != None:
 					job = Job(user=request.user,video=answer,language=language,delay="0",play=False,finished=False)
 					job.save()
-					global job_id
-					job_id=job.id
-					return render(request,'addsubs/options.html',None) # Llevamos a las siguientes opciones
+					return redirect('options',job_id=job.id)
 				else:
 					context = {'error': 404}
 	return render(request,'addsubs/main.html',context)
 
 @login_required()
-def options(request):
+def options(request,job_id):
+	return render(request,'addsubs/options.html',{'job_id': job_id})
+
+@login_required()
+def do_job(request,job_id):
 	font=size=delay=add=autoplay= None
-	if job_id != "": # Si se entra directamente aunque se este logeado no hay trabajo que hacer
+	if job_id != None and job_id != "": # Si se entra directamente aunque se este logeado no hay trabajo que hacer
 		job = Job.objects.get(id=job_id)
 		if request.POST.has_key('Font'):
 			font=request.POST['Font']

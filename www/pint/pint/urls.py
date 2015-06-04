@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', login, {'template_name': 'addsubs/index.html', }, name="index"),
     url(r'^main$', 'addsubs.views.main', name='main'),
     url(r'^signup$', 'addsubs.views.signup', name='signup'),
-    url(r'^options$', 'addsubs.views.options', name='options'),
+    url(r'^options/(?P<job_id>\d+)/$', 'addsubs.views.options', name='options'),
+    url(r'^(?P<job_id>\d+)/$', 'addsubs.views.do_job', name='do_job'),
     url(r'^jobs$', 'addsubs.views.jobs', name='jobs'),
 ]

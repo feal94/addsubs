@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-        <div id="contact-area">
-			<form method="post" action="{% url 'options' %}">
-				{% csrf_token %}
-				<label for="Font">Font:</label>
-				<input type="text" name="Font" id="Font" placeholder="Font to be used in subtitles (must be installed)" />
+	<div id="options">
+		<form method="post" action="{% url 'do_job' job_id %}">
+			{% csrf_token %}
+			<label for="Font">Font:</label>
+			<input type="text" name="Font" id="Font" placeholder="Font to be used in subtitles (must be installed)" />
 
-				<label for="Size">Size:</label>
-				<input type="number" name="Size" id="Size" placeholder="Size of the font" />
+			<label for="Size">Size:</label>
+			<input type="number" name="Size" id="Size" placeholder="Size of the font" />
 
-				<label for="Delay">Delay:</label>
-				<input type="number" name="Delay" id="Delay" placeholder="+/- seconds of delay in the subtitles" />
+			<label for="Delay">Delay:</label>
+			<input type="number" name="Delay" id="Delay" placeholder="+/- seconds of delay in the subtitles" />
 
+			<div id="radio_section">
 				<label for="Add">Add Subs:</label>
 				<fieldset>
 				<div id="radio">
 				<input type="radio" name="Add" value="yes" checked>Yes
-				<br>
 				<input type="radio" name="Add" value="no">No
 				</div>
 				</fieldset>
@@ -25,17 +25,12 @@
 				<label for="Autoplay">Auto Play in VLC:</label>
 				<fieldset>
 				<input type="radio" name="Autoplay" value="yes" checked>Yes
-				<br>
 				<input type="radio" name="Autoplay" value="no">No
 				</div>
 				</fieldset>
-				<div class="center">
 				<input type="submit" name="submit" value="Submit" class="submit-button" />
-				</div>
-			</form>
-			<div style="clear: both;"></div>
-
-		</div>
-		<p>When you submit the options you will be redirected to main menu. The application
-		will be working in background</p>
+			</div>
+		</form>
+		<div style="clear: both;"></div>
+	</div>
 {% endblock %}
