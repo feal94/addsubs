@@ -36,13 +36,6 @@ def main(request):
 def options(request,job_id):
 	return render(request,'addsubs/options.html',{'job_id': job_id})
 
-def do_job_aux(job_id, path, font, size, delay, add, autoplay):
-	men = Mencoder()
-	men.addsubs(path,"addsubs.srt",font,size,delay,add,autoplay)
-	job = Job.objects.get(id=job_id)
-	job.finished=True
-	job.save
-
 @login_required()
 def do_job(request,job_id):
 	font=size=delay=add=autoplay= None
@@ -61,10 +54,12 @@ def do_job(request,job_id):
 			job.play = True
 			autoplay=request.POST['Autoplay']
 		job.save
-		t = threading.Thread(target = do_job_aux,args=(job_id,path,font,size,delay,add,autoplay))
+		men = Mencoder()
+		t = threading.Thread(target = men.addsubs,args=(path,"addsubs.srt",font,size,delay,add,autoplay))
 		t.start()
 		#t.join()
-
+		job.finished=True
+		job.save
 	context=None
 	return redirect('main')
 
