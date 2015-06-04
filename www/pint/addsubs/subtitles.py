@@ -23,13 +23,16 @@ class Main():
 
 
 	def get_hash(self):
-		readsize = 64 * 1024
-		with open(self.name, 'rb') as f:
-			size = os.path.getsize(self.name)
-			data = f.read(readsize)
-			f.seek(-readsize, os.SEEK_END)
-			data += f.read(readsize)
-		return hashlib.md5(data).hexdigest()
+		try:
+			readsize = 64 * 1024
+			with open(self.name, 'rb') as f:
+				size = os.path.getsize(self.name)
+				data = f.read(readsize)
+				f.seek(-readsize, os.SEEK_END)
+				data += f.read(readsize)
+			return hashlib.md5(data).hexdigest()
+		except:
+			return None
 
 	def check(self):
 		#This list all available languages for a movie
@@ -71,32 +74,33 @@ class Main():
 
 
 	def main(self):
-		t = threading.Thread(target = self.check)
-		t.start()
-		t.join()
-		answer = self.queue.get()
-		if answer != "Result failed" and answer != "Server failed":
-			if self.language in answer:
-				t = threading.Thread(target = self.download)
-				t.start()
-				t.join()
-				subtitles = self.queue.get()
-				if subtitles != "Malformed request":
-					imdb = Imdb(self.name)
-					information = imdb.main()
-					if information != None:
-						#agregar informacion a subtitulos
-						subtitles = "00:00:1,0 --> 00:00:20,0\nTitle: " + information.title + "\n Director:" + information.director + "\n Year:" + information.year + "\n \n" + subtitles
-						movie = Movie(title=information.title, director=information.director, year=information.year, hash=self.hash)
-						movie.save()
-					else:
-						movie = Movie(title=self.name, hash=self.hash)
-						movie.save()
-					try:
-						f = open("addsubs.srt",'w')
-						f.write(subtitles.encode("utf-8"))
-						f.close()
-					except IOError:
-						return None
-					return movie
+		if self.hash != None:
+			t = threading.Thread(target = self.check)
+			t.start()
+			t.join()
+			answer = self.queue.get()
+			if answer != "Result failed" and answer != "Server failed":
+				if self.language in answer:
+					t = threading.Thread(target = self.download)
+					t.start()
+					t.join()
+					subtitles = self.queue.get()
+					if subtitles != "Malformed request":
+						imdb = Imdb(self.name)
+						information = imdb.main()
+						if information != None:
+							#agregar informacion a subtitulos
+							subtitles = "00:00:1,0 --> 00:00:20,0\nTitle: " + information.title + "\n Director:" + information.director + "\n Year:" + information.year + "\n \n" + subtitles
+							movie = Movie(title=information.title, director=information.director, year=information.year, hash=self.hash)
+							movie.save()
+						else:
+							movie = Movie(title=self.name, hash=self.hash)
+							movie.save()
+						try:
+							f = open("addsubs.srt",'w')
+							f.write(subtitles.encode("utf-8"))
+							f.close()
+						except IOError:
+							return None
+						return movie
 		return None
